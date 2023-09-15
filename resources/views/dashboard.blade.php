@@ -16,63 +16,57 @@
 <x-app-layout>
 
 
-
-
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3" style="width: 90%; margin: 5% auto;">
-@php
-$allProjectsStatusOne = true;
-@endphp
 
-@foreach($projects as $project)
-  @if($project->status != 1)
-    @php
-    $allProjectsStatusOne = false;
-    break; // Se encontramos um projeto com status diferente de 1, podemos parar a verificação
-    
-    @endphp
-    <div class="col">
-    <div class="card" style="background-color: #6875f5; color: white;">
-      <div class="card-body">
-        <a href="/project/{{$project->id}}" style="text-decoration: none; color: white; font-size: 25px;" class="card-title">{{$project->projectName}}</a>
-        <p class="card-text" style="color: lightgrey;">{{$project->projectDescription}}</p>
-        <div class="gut" style="display: flex; justify-content: space-evenly; margin-top: 5%;">
-            <p><span style="color: white;">G:</span> <span style="font-size: 25px; font-weight: bold;">{{$project->G}}</span></p>
-            <p><span style="color: white;">U:</span> <span style="font-size: 25px; font-weight: bold;">{{$project->U}}</span></p>
-            <p><span style="color: white;">T:</span> <span style="font-size: 25px; font-weight: bold;">{{$project->T}}</span></p>
+  @if(count($projects) > 0)
+      @php
+      $allProjectsStatusOne = true; 
+      @endphp
+
+      @foreach($projects as $project)
+          @if($project->status != 1)
+              @php
+              $allProjectsStatusOne = false; 
+              @endphp
+
+              <div class="col">
+                <div class="card" style="background-color: #6875f5; color: white;">
+                  <div class="card-body">
+                    <a href="/project/{{$project->id}}" style="text-decoration: none; color: white; font-size: 25px;" class="card-title">{{$project->projectName}}</a>
+                    <p class="card-text" style="color: lightgrey;">{{$project->projectDescription}}</p>
+                    <div class="gut" style="display: flex; justify-content: space-evenly; margin-top: 5%;">
+                        <p><span style="color: white;">G:</span> <span style="font-size: 25px; font-weight: bold;">{{$project->G}}</span></p>
+                        <p><span style="color: white;">U:</span> <span style="font-size: 25px; font-weight: bold;">{{$project->U}}</span></p>
+                        <p><span style="color: white;">T:</span> <span style="font-size: 25px; font-weight: bold;">{{$project->T}}</span></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          @endif
+      @endforeach
+
+      @if($allProjectsStatusOne)
+          
+          <div class="projetos-finalizados" style="margin: auto; text-align: center;">
+          <h2 style="font-size: 32px; text-align: center; width: 100%;">Aí sim! Todos os seus projetos estão finalizados 😎</h2>
+          <p style="color: grey;">Este é um excelente sinal, mas sempre cabe mais um:</p><br/>
+
+          <a href="/project/create" class="cadastrar-agora" style="background-color: #6875f5; color: white; padding: 2%;  border-radius: 10px; font-size: 22px;">Novo projeto</a>
         </div>
+      @endif
+
+  @else
+      
+      <div class="msg-sem-projetos" style="margin: auto; text-align: center;">
+          <h3 style="font-size: 32px;">Você ainda não faz parte de nenhum projeto :(</h3>
+          <br/>
+          <p style="color: grey;">Não perca mais tempo e desfrute da agilidade de gerenciamento que a InVision te proporciona.</p>
+          <br/>
+          <a href="/project/create" class="cadastrar-agora" style="background-color: #6875f5; color: white; padding: 2%;  border-radius: 10px; font-size: 22px;">Novo projeto</a>
       </div>
-    </div>
-  </div>
   @endif
-
-@endforeach
-
-@if($allProjectsStatusOne)
-  <div class="projetos-finalizados" style="margin: auto; text-align: center;">
-    <h2 style="font-size: 32px; text-align: center; width: 100%;">Aí sim! Todos os seus projetos estão finalizados 😎</h2>
-    <p style="color: grey;">Este é um excelente sinal, mas sempre cabe mais um:</p><br/>
-
-    <a href="/project/create" class="cadastrar-agora" style="background-color: #6875f5; color: white; padding: 2%;  border-radius: 10px; font-size: 22px;">Novo projeto</a>
-  </div>
-@endif
-
-
-
-@if(count($projects) == 0)
-    <div class="msg-sem-projetos" style="margin: auto; text-align: center;">
-        <h3 style="font-size: 32px;">Você ainda não faz parte de nenhum projeto :(</h3>
-        <br/>
-        <p style="color: grey;">Não perca mais tempo e desfrute da agilidade de gerenciamento que a InVision te proporciona.</p>
-        <br/>
-        <a href="/project/create" class="cadastrar-agora" style="background-color: darkgrey; color: white; padding: 2%;  border-radius: 10px; font-size: 22px;">Novo projeto</a>
-    </div>
-
-@endif
-
-
+    
 </div>
-
-
 
 
  <div id="generic_price_table" style="background-color: #f3f4f6;">   
@@ -212,11 +206,6 @@ $allProjectsStatusOne = true;
         </div>
     </section>             
 </div> 
-
-
-
-
-
 
 
 </x-app-layout>
