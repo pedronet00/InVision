@@ -1,6 +1,8 @@
 @extends('layouts.main')
 
-@section('title', 'Cadastrar Projeto')
+@php
+  $pageTitle = 'Criar Projeto | InVision';
+@endphp
 
 @section('content')
 

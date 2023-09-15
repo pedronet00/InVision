@@ -1,9 +1,11 @@
 @extends('layouts.main')
 
-@section('title', 'Projetos | Listar')
 
 @section('content')
 
+@php
+  $pageTitle = 'Seus Projetos | InVision';
+@endphp
 
 
 <x-app-layout>
@@ -14,16 +16,23 @@
   <div class="container">
     <div class="row">
         
-  
-      
+    
 
       {{-- PROJETOS EM ANDAMENTO --}}
-      <h1 style="text-align: center; margin: auto; font-size: 50px;">Em andamento</h1>
+
+      <?php $totalProjetosAndamento = 0;?>
+        @foreach($projects as $project)
+          @if($project->status == 0)
+            <?php $totalProjetosAndamento = $totalProjetosAndamento + 1; ?>
+          @endif
+        @endforeach
+
+      <h1 style="text-align: center; margin: auto; font-size: 50px;">Em andamento (<?php echo $totalProjetosAndamento; ?>) </h1>
       
       <div class="row" style="margin: 5% auto;">
         @foreach($projects as $project)
           @if($project->status == 0)
-              <div class="card" style="width: 18rem; margin: 2% auto; height: 300px;">
+              <div class="card" style="width: 18rem; margin: 2% auto; height: 200px;">
                 <div class="card-body">
                   <div class="textos" style="height: 50%;">
                     <h5 class="card-title" style="font-size: 25px; font-weight: bold; color: #6875f5;">{{$project->projectName}}</h5>
@@ -50,37 +59,27 @@
 
 
     {{-- PROJETOS FINALIZADOS --}}
+
+    <?php $totalProjetosFinalizados = 0;?>
+    @foreach($projects as $project)
+      @if($project->status == 1)
+        <?php $totalProjetosFinalizados = $totalProjetosFinalizados + 1; ?>
+      @endif
+    @endforeach
     
     
-    <h1 style="text-align: center; margin: auto; font-size: 50px; margin-top: 5%;">Finalizados</h1>
+    <h1 style="text-align: center; margin: auto; font-size: 50px; margin-top: 5%;">Finalizados (<?php echo $totalProjetosFinalizados; ?>)</h1>
     
-    {{-- <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3" style="width: 100%; margin: auto;">
-      @foreach($projects as $project)
-        <?php $finalizados = 0; ?>
-        @if($project->status == 1)
-          <?php $finalizados = $finalizados + 1; ?>
-          <div class="col">
-            <div class="card" >
-              <div class="card-body" >
-                <h5 class="card-title" style="font-size: 25px;">{{$project->projectName}}</h5>
-                <p class="card-text" style="color: grey;">{{$project->projectDescription}}</p>
-                <a href="/project/{{$project->id}}" style="text-decoration: none; color: black; font-weight: bold;">Ver detalhes</a>
-              </div>
-            </div>
-          </div>
-        @endif
-        
-      @endforeach --}}
 
       <div class="row" style="margin: 5% auto;">
         @foreach($projects as $project)
         <?php $finalizados = 0; ?>
           @if($project->status == 1)
           <?php $finalizados = $finalizados + 1; ?>
-              <div class="card" style="width: 18rem; margin: 2% auto; height: 300px;">
+              <div class="card" style="width: 18rem; margin: 2% auto; height: 200px;">
                 <div class="card-body">
                   <div class="textos" style="height: 50%;">
-                    <h5 class="card-title" style="font-size: 25px; font-weight: bold; color: #6875f5;">{{$project->projectName}}</h5>
+                    <h5 class="card-title" style="font-size: 25px; font-weight: bold; color: #6875f5;"><a href="/project/{{$project->id}}">{{$project->projectName}}</a></h5>
                     <p class="card-text" style="color: grey;">{{$project->projectDescription}}</p>
                     <br/>
                     <p class="card-text">Time: {{$project->team->name}}</p>

@@ -4,6 +4,10 @@
 
   @section('content')
 
+  @php
+    $pageTitle = 'Projeto | InVision';
+  @endphp
+
   <x-app-layout>
 
   <h1 style="text-align: center; font-size: 50px; margin-top: 5%;">{{$project->projectName}}</h1>

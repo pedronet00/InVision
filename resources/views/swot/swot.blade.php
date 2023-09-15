@@ -5,6 +5,10 @@
 
 @section('content')
 
+@php
+    $pageTitle = 'SWOT | InVision';
+  @endphp
+
 <x-app-layout>
 
 <style>

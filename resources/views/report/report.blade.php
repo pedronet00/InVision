@@ -1,8 +1,12 @@
 @extends('layouts.main')
 
-@section('title', 'Cadastrar Projeto')
+
 
 @section('content')
+
+@php
+  $pageTitle = 'Relatórios | InVision';
+@endphp
 
 <x-app-layout>
 

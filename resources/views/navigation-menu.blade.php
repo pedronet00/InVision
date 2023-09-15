@@ -6,7 +6,8 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-mark class="block h-9 w-auto" />
+                        <!-- <x-application-mark class="block h-9 w-auto" /> -->
+                        <h2 style="font-size: 32px;">In<span style="font-weight: bold; color: #6875f5;">Vision</span>
                     </a>
                 </div>
 
