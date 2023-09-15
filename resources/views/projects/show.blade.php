@@ -54,37 +54,13 @@
         <button type="submit" class="btn btn-primary" style="background-color: #0d6efd;">Cadastrar</button>
       </div>
     </form>
-  @else
-    <form class="row g-3" style="width: 50%; margin: 2% auto 2% auto;" method="POST" action="/project/{{$project->id}}/task">
-      @csrf
-      <div class="col-md-12">
-        <label for="inputEmail4" class="form-label">Tarefa</label>
-        <input type="text" class="form-control" id="inputEmail4" name="taskName" disabled>
-      </div>
-      <div class="col-md-4">
-        <label for="inputEmail4" class="form-label">Gravidade (G)</label>
-        <input type="number" class="form-control" id="inputEmail4" value="0" max="5" min="0" name="g" disabled>
-      </div>
-      <div class="col-md-4">
-        <label for="inputEmail4" class="form-label">Urgência (U)</label>
-        <input type="number" class="form-control" id="inputEmail4" value="0" max="5" min="0" name="u" disabled>
-      </div>
-      <div class="col-md-4">
-        <label for="inputEmail4" class="form-label">Tendência (T)</label>
-        <input type="number" class="form-control" id="inputEmail4" value="0" max="5" min="0" name="t" disabled>
-      </div>
-      
-      <div class="col-12">
-        <button type="submit" class="btn btn-primary" style="background-color: #0d6efd;" disabled>Cadastrar</button>
-      </div>
-    </form>
   @endif
 
 
 
 
 
-      <table class="table" style="width: 70%; margin: auto; text-align:center;">
+      <table class="table" style="width: 70%; margin: 5% auto; text-align:center;">
     <thead>
       <tr>
         <th scope="col">#</th>

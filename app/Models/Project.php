@@ -18,4 +18,8 @@ class Project extends Model
     {
         return $this->belongsTo(Team::class, 'team_id');
     }
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'project'); // 'project' é o nome da coluna que faz a ligação
+    }
 }

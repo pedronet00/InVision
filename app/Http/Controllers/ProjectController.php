@@ -119,4 +119,61 @@ class ProjectController extends Controller
         return redirect('/project/list');
 
     }
+
+    public function report() {
+
+        $user = auth()->user();
+    
+        $projects = $user->projects()->get();
+
+        $totalProjects = $projects->count();
+    
+        $finishedProjects = $user->projects()->where('status', 1)->get();
+    
+        $teamsAsMember = $user->teams()->get();
+        $teamsAsOwner = $user->ownedTeams()->get();
+        $teams = $teamsAsMember->concat($teamsAsOwner);
+    
+        $totalTasks = 0;
+    
+        foreach ($projects as $project) {
+            $totalTasks += $project->tasks()->count();
+        }
+    
+        $totalTasksStatusOne = 0;
+    
+        foreach ($finishedProjects as $project) {
+            $totalTasksStatusOne += $project->tasks()->where('status', 1)->count();
+        }
+
+        if($totalTasks == 0){
+            $taskDonePercent = ($totalTasksStatusOne / 1) * 100;
+        } else{
+            $taskDonePercent = ($totalTasksStatusOne / $totalTasks) * 100;
+        }
+
+        $projectsByTeam = [];
+
+        
+        $totalProjects = $projects->count();
+
+        
+        foreach ($teams as $team) {
+            $teamProjects = $projects->filter(function ($project) use ($team) {
+                return $project->team_id === $team->id;
+            });
+
+            $projectCount = $teamProjects->count();
+
+            $percentage = ($projectCount / $totalProjects) * 100;
+
+            $projectsByTeam[$team->name] = [
+                'raw_count' => $projectCount,
+                'percentage' => $percentage,
+            ];
+        }
+        
+        return view('report.report', compact('totalProjects','finishedProjects', 'teams', 'totalTasksStatusOne', 'taskDonePercent', 'projectsByTeam'));
+    }
+    
 }

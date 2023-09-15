@@ -38,9 +38,7 @@ Route::get('/project/{id}/deleted', [ProjectController::class, 'projectDeleted']
 Route::get('/project/{id}/ended', [ProjectController::class, 'projectEnded'])->middleware('auth');
 
 
-Route::get('/report', function(){
-    return view('report.report');
-})->middleware('auth');
+Route::get('/report', [ProjectController::class, 'report'])->middleware('auth');
 
 Route::get('/profile/show', function(){ 
     return view('profile.show');})->middleware('auth');

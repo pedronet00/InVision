@@ -27,7 +27,7 @@
           @endif
         @endforeach
 
-      <h1 style="text-align: center; margin: auto; font-size: 50px;">Em andamento (<?php echo $totalProjetosAndamento; ?>) </h1>
+      <h1 style="text-align: center; margin: auto; font-size: 32px;">Em andamento (<?php echo $totalProjetosAndamento; ?>) </h1>
       
       <div class="row" style="margin: 5% auto;">
         @foreach($projects as $project)
@@ -68,7 +68,7 @@
     @endforeach
     
     
-    <h1 style="text-align: center; margin: auto; font-size: 50px; margin-top: 5%;">Finalizados (<?php echo $totalProjetosFinalizados; ?>)</h1>
+    <h1 style="text-align: center; margin: auto; font-size: 32px; margin-top: 5%;">Finalizados (<?php echo $totalProjetosFinalizados; ?>)</h1>
     
 
       <div class="row" style="margin: 5% auto;">

@@ -13,5 +13,8 @@ class Task extends Model
 
     protected $fillable = ['taskName', 'G', 'U', 'T', 'Total', 'project'];
 
-
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'project'); // 'project' é o nome da coluna que faz a ligação
+    }
 }
