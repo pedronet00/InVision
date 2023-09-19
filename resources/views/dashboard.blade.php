@@ -19,15 +19,10 @@
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3" style="width: 90%; margin: 5% auto;">
 
   @if(count($projects) > 0)
-      @php
-      $allProjectsStatusOne = true; 
-      @endphp
+
 
       @foreach($projects as $project)
           @if($project->status != 1)
-              @php
-              $allProjectsStatusOne = false; 
-              @endphp
 
               <div class="col">
                 <div class="card" style="background-color: #6875f5; color: white;">
@@ -44,21 +39,9 @@
               </div>
           @endif
       @endforeach
-
-      @if($allProjectsStatusOne)
-          
-          <div class="projetos-finalizados" style="margin: auto; text-align: center;">
-          <h2 style="font-size: 32px; text-align: center; width: 100%;">Aí sim! Todos os seus projetos estão finalizados 😎</h2>
-          <p style="color: grey;">Este é um excelente sinal, mas sempre cabe mais um:</p><br/>
-
-          <a href="/project/create" class="cadastrar-agora" style="background-color: #6875f5; color: white; padding: 2%;  border-radius: 10px; font-size: 22px;">Novo projeto</a>
-        </div>
-      @endif
-
   @else
-      
       <div class="msg-sem-projetos" style="margin: auto; text-align: center;">
-          <h3 style="font-size: 32px;">Você ainda não faz parte de nenhum projeto :(</h3>
+          <h3 style="font-size: 32px;">Você não tem nenhum projeto em andamento :(</h3>
           <br/>
           <p style="color: grey;">Não perca mais tempo e desfrute da agilidade de gerenciamento que a InVision te proporciona.</p>
           <br/>
