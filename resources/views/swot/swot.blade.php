@@ -23,11 +23,21 @@
     margin: auto;
   }
 
+  .col{
+    width: 40%;
+  }
+
   .section {
     flex: 1;
     padding: 0px;
     box-sizing: border-box;
     
+  }
+
+  @media(max-width: 375px){
+    .col{
+      width: 100%;
+    }
   }
 
   .strength,
@@ -37,6 +47,9 @@
     width: 50%;
     box-sizing: border-box;
     height: 300px;
+
+  
+    
   }
 </style>
     <h1 style="text-align: center; margin-top: 2%; font-size: 50px;">Matriz SWOT</h1>
@@ -46,7 +59,7 @@
 
 
     <div class="row row-cols-2 g-3" style="justify-content: center;">
-      <div class="col" onload="onload()" style="width: 40%;">
+      <div class="col" onload="onload()">
         <div class="card">
           <div class="card-body">
             <h4 style="text-align: center; font-size: 22px;"><b>Forças</b></h4>
@@ -55,7 +68,7 @@
           </div>
         </div>
       </div>
-      <div class="col" onload="onload()" style="width: 40%;">
+      <div class="col" onload="onload()">
         <div class="card">
           <div class="card-body">
             <h4 style="text-align: center; font-size: 22px;"><b>Fraquezas</b></h4>
@@ -64,7 +77,7 @@
           </div>
         </div>
       </div>
-      <div class="col" onload="onload()" style="width: 40%;">
+      <div class="col" onload="onload()">
         <div class="card">
           <div class="card-body">
             <h4 style="text-align: center; font-size: 22px;"><b>Oportunidades</b></h4>
@@ -73,7 +86,7 @@
           </div>
         </div>
       </div>
-      <div class="col" onload="onload()" style="width: 40%;">
+      <div class="col" onload="onload()">
         <div class="card">
           <div class="card-body">
             <h4 style="text-align: center; font-size: 22px;"><b>Ameaças</b></h4>
