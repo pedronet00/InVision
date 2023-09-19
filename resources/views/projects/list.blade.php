@@ -7,52 +7,135 @@
   $pageTitle = 'Seus Projetos | InVision';
 @endphp
 
+<style>
+  .card-subtitle, .card-title {
+    font-weight: 400;
+  }
 
+  .card-title {
+      font-size: .875rem;
+      color: #495057;
+  }
+  .card {
+      margin-bottom: 24px;
+      box-shadow: 0 0 0.875rem 0 rgba(33,37,41,.05);
+  }
+  .card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      word-wrap: break-word;
+      background-color: #fff;
+      background-clip: initial;
+      border: 0 solid transparent;
+      border-radius: .25rem;
+  }
+  .card-body {
+      flex: 1 1 auto;
+      padding: 1.25rem;
+  }
+  .card-header:first-child {
+      border-radius: .25rem .25rem 0 0;
+  }
+  .card-header {
+      border-bottom-width: 1px;
+  }
+  .pb-0 {
+      padding-bottom: 0!important;
+  }
+  .card-header {
+      padding: 1rem 1.25rem;
+      margin-bottom: 0;
+      background-color: #fff;
+      border-bottom: 0 solid transparent;
+  }
+
+  .container{
+    margin-top: 5%;
+  }
+
+</style>
 <x-app-layout>
 
 
 @if(count($projects) > 0)
-<a href="/project/create" style="margin: 2%; width: 12rem; border-radius: 10px; padding: 0.5%; background-color: #6875f5; color: white; text-align: center; display: block; font-size: 20px;"><i class="fa-solid fa-plus" style="color: #ffffff;"></i>&nbsp;&nbsp;Novo Projeto</a>
+{{-- <a href="/project/create" style="margin: 2%; width: 12rem; border-radius: 10px; padding: 0.5%; background-color: #6875f5; color: white; text-align: center; display: block; font-size: 20px;"><i class="fa-solid fa-plus" style="color: #ffffff;"></i>&nbsp;&nbsp;Novo Projeto</a> --}}
   <div class="container">
-    <div class="row">
+    {{-- <div class="row"> --}}
         
     
 
       {{-- PROJETOS EM ANDAMENTO --}}
 
-      <?php $totalProjetosAndamento = 0;?>
+       <?php $totalProjetosAndamento = 0;?>
         @foreach($projects as $project)
           @if($project->status == 0)
             <?php $totalProjetosAndamento = $totalProjetosAndamento + 1; ?>
           @endif
         @endforeach
 
-      <h1 style="text-align: center; margin: auto; font-size: 32px;">Em andamento (<?php echo $totalProjetosAndamento; ?>) </h1>
+<div class="container p-0">
+
+    <a href="#" class="btn float-right mt-n1" style="background-color: #6875f5; color: white;"><i class="fas fa-plus"></i> Novo projeto</a>
+	<h1 class="h3 mb-3">Em andamento (<?php echo $totalProjetosAndamento; ?>)</h1>
+
+	<div class="row">
+  @foreach($projects as $project)
+    @if($project->status == 0)
+		<div class="col-12 col-md-6 col-lg-3">
+			<div class="card">
       
-      <div class="row" style="margin: 5% auto;">
-        @foreach($projects as $project)
-          @if($project->status == 0)
-              <div class="card" style="width: 18rem; margin: 2% auto; height: 200px;">
-                <div class="card-body">
-                  <div class="textos" style="height: 50%;">
-                    <h5 class="card-title" style="font-size: 25px; font-weight: bold; color: #6875f5;">{{$project->projectName}}</h5>
-                    <p class="card-text" style="color: grey;">{{$project->projectDescription}}</p>
-                    <br/>
-                    <p class="card-text">Time: {{$project->team->name}}</p>
-                  </div>
-                  <div style="margin: 15% auto; font-size: 20px; text-align: center;">
-                    <a href="/project/{{$project->id}}" class="card-link" ><i class="fa-solid fa-pen-to-square" style="color: #6875f5;"></i></a>
-                    <a href="/project/{{$project->id}}/deleted" class="card-link"><i class="fa-solid fa-trash" style="color: #cb3434;"></i></a>
-                    <a href="/project/{{$project->id}}/ended" class="card-link"><i class="fa-solid fa-circle-check" style="color: #197127;"></i></i></a>
-                  </div>
-                </div>
-              </div>
-           
-          @endif
-        @endforeach
-        
-           </div>
-      </div>
+				<div class="card-header px-4 pt-4">
+					<div class="card-actions float-right">
+						<div class="dropdown show">
+    <a href="#" data-toggle="dropdown" data-display="static">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal align-middle">
+            <circle cx="12" cy="12" r="1"></circle>
+            <circle cx="19" cy="12" r="1"></circle>
+            <circle cx="5" cy="12" r="1"></circle>
+        </svg>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" href="/project/{{$project->id}}">Editar</a>
+        <a class="dropdown-item" href="/project/{{$project->id}}/deleted">Deletar</a>
+        <a class="dropdown-item" href="/project/{{$project->id}}/ended">Finalizar</a>
+    </div>
+</div>
+
+					</div>
+					<h5 class="card-title mb-0">{{$project->projectName}}</h5>
+					<div class="badge bg-warning my-2">Em andamento</div>
+				</div>
+				<div class="card-body px-4 pt-2">
+					<p>Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque
+						sed ipsum.</p>
+          <div class="icones" style="display: flex;">
+            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Avatar" width="28" height="28">
+            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="rounded-circle mr-1" alt="Avatar" width="28" height="28">
+            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Avatar" width="28" height="28">
+          </div>
+				</div>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item px-4 pb-4">
+						<p class="mb-2 font-weight-bold">Progress <span class="float-right">100%</span></p>
+						<div class="progress progress-sm">
+							<div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+      
+		</div>
+    @endif
+      @endforeach
+	</div>
+</div>
+
+
+
+
 
 
 
@@ -68,34 +151,58 @@
     @endforeach
     
     
-    <h1 style="text-align: center; margin: auto; font-size: 32px; margin-top: 5%;">Finalizados (<?php echo $totalProjetosFinalizados; ?>)</h1>
-    
+    <div class="container p-0">
+	<h1 class="h3 mb-3">Finalizados (<?php echo $totalProjetosFinalizados; ?>)</h1>
 
-      <div class="row" style="margin: 5% auto;">
-        @foreach($projects as $project)
-        <?php $finalizados = 0; ?>
-          @if($project->status == 1)
-          <?php $finalizados = $finalizados + 1; ?>
-              <div class="card" style="width: 18rem; margin: 2% auto; height: 200px;">
-                <div class="card-body">
-                  <div class="textos" style="height: 50%;">
-                    <h5 class="card-title" style="font-size: 25px; font-weight: bold; color: #6875f5;"><a href="/project/{{$project->id}}">{{$project->projectName}}</a></h5>
-                    <p class="card-text" style="color: grey;">{{$project->projectDescription}}</p>
-                    <br/>
-                    <p class="card-text">Time: {{$project->team->name}}</p>
-                  </div>
-                  <div style="margin: 15% auto; font-size: 20px; text-align: center;">
-                    <h3 style="text-decoration: underline;">Projeto finalizado</h3>
-                  </div>
-                </div>
-              </div>
-           
-          @endif
-        @endforeach
-        
-           </div>
-      </div>
-      @if($finalizados == 0)
+	<div class="row">
+  @foreach($projects as $project)
+    @if($project->status == 1)
+		<div class="col-12 col-md-6 col-lg-3">
+			<div class="card">
+      
+				<div class="card-header px-4 pt-4">
+					<div class="card-actions float-right">
+						<div class="dropdown show">
+							<a href="#" data-toggle="dropdown" data-display="static">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal align-middle"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+							</a>
+
+							<div class="dropdown-menu dropdown-menu-right">
+								<a class="dropdown-item" href="/project/{{$project->id}}">Editar</a>
+								<a class="dropdown-item" href="/project/{{$project->id}}/deleted">Deletar</a>
+								<a class="dropdown-item" href="/project/{{$project->id}}/ended">Finalizar</a>
+							</div>
+						</div>
+					</div>
+					<h5 class="card-title mb-0">{{$project->projectName}}</h5> 
+					<div class="badge bg-success my-2">Finalizado</div>
+				</div>
+				<div class="card-body px-4 pt-2">
+					<p>Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque
+						sed ipsum.</p>
+          <div class="icones" style="display: flex;">
+            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Avatar" width="28" height="28">
+            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="rounded-circle mr-1" alt="Avatar" width="28" height="28">
+            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Avatar" width="28" height="28">
+          </div>
+				</div>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item px-4 pb-4">
+						<p class="mb-2 font-weight-bold">Progress <span class="float-right">100%</span></p>
+						<div class="progress progress-sm">
+							<div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+      
+		</div>
+    @endif
+      @endforeach
+	</div>
+</div>
+      @if($totalProjetosFinalizados == 0)
           <p style="text-align: center; width: 100%; margin-top: 10%; color: grey;">Não há projetos finalizados.</p>
         @endif
     </div>
