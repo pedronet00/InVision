@@ -150,7 +150,16 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                {{ __('Home') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link href="/project/list" :active="request()->routeIs('projects.list')">
+                {{ __('Projetos') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link href="/swot" :active="request()->routeIs('swot.swot')">
+                {{ __('Swot') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link href="/report" :active="request()->routeIs('report.report')">
+                {{ __('Relatórios') }}
             </x-responsive-nav-link>
         </div>
 
@@ -162,6 +171,7 @@
                         <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                     </div>
                 @endif
+                
 
                 <div>
                     <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
@@ -172,7 +182,7 @@
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
                 <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
-                    {{ __('Profile') }}
+                    {{ __('Perfil') }}
                 </x-responsive-nav-link>
 
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
@@ -187,7 +197,7 @@
 
                     <x-responsive-nav-link href="{{ route('logout') }}"
                                    @click.prevent="$root.submit();">
-                        {{ __('Log Out') }}
+                        {{ __('Sair') }}
                     </x-responsive-nav-link>
                 </form>
 
