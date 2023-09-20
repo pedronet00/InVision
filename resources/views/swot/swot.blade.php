@@ -52,8 +52,8 @@
     
   }
 </style>
-    <h1 style="text-align: center; margin-top: 2%; font-size: 50px;">Matriz SWOT</h1>
-    <p style="text-align: center; margin-top: 2%;">Utilize esse espaço para escrever as <span style="font-weight: 700; color: grey;">Forças, Fraquezas, Oportunidades e Ameaças</span> de seu negócio!</p>
+    <h1 style="text-align: center; margin-top: 2%; font-size: 50px;">Matriz SWOT - {{$currentTeam->name}}</h1>
+    <p style="text-align: center; margin-top: 2%;">Utilize esse espaço para escrever as <span style="font-weight: 700; color: #8fa3f7;">Forças, Fraquezas, Oportunidades e Ameaças</span> de seu negócio!</p>
 
 <div class="swot" style="margin: 2% auto;">
 
@@ -100,34 +100,43 @@
 </div>
 
 <script>
-function changed(){
-  var strengths = document.getElementById('strength').value;
-  var weaknesses = document.getElementById('weak').value;
-  var opportunities = document.getElementById('opportunity').value;
-  var threats = document.getElementById('threat').value;
-  
-  window.localStorage.setItem('data', JSON.stringify({
-    strengths: strengths,
-    weaknesses: weaknesses,
-    opportunities: opportunities,
-    threats: threats,
-  }));
-}
+    function changed(){
+        var strengths = document.getElementById('strength').value;
+        var weaknesses = document.getElementById('weak').value;
+        var opportunities = document.getElementById('opportunity').value;
+        var threats = document.getElementById('threat').value;
+        
+        @if(isset($currentTeam))
+            var currentTeamId = {{ $currentTeam->id }};
+        @endif
 
-window.addEventListener('load', function () {
-  console.log('Loaded');
-  try {
-    var data = JSON.parse(window.localStorage.getItem('data'));
-  } catch (e) {
-    console.log('Error');
-    window.localStorage.setItem('data', '');
-    return;
-  }
-  document.getElementById('strength').value = data.strengths;
-  document.getElementById('weak').value = data.weaknesses;
-  document.getElementById('opportunity').value = data.opportunities;
-  document.getElementById('threat').value = data.threats;
-});
+        
+        window.localStorage.setItem('data_' + currentTeamId, JSON.stringify({
+            strengths: strengths,
+            weaknesses: weaknesses,
+            opportunities: opportunities,
+            threats: threats,
+        }));
+    }
+
+    window.addEventListener('load', function () {
+        console.log('Loaded');
+        @if(isset($currentTeam))
+            var currentTeamId = {{ $currentTeam->id }};
+        @endif
+        var cacheKey = 'data_' + currentTeamId;
+        try {
+            var data = JSON.parse(window.localStorage.getItem(cacheKey));
+        } catch (e) {
+            console.log('Error');
+            window.localStorage.setItem(cacheKey, '');
+            return;
+        }
+        document.getElementById('strength').value = data.strengths;
+        document.getElementById('weak').value = data.weaknesses;
+        document.getElementById('opportunity').value = data.opportunities;
+        document.getElementById('threat').value = data.threats;
+    });
 </script>
 
 </x-app-layout>

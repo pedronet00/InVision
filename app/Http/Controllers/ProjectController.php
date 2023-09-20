@@ -24,6 +24,7 @@ class ProjectController extends Controller
     }
 
     public function projectList(){
+
         $user = auth()->user();
     
         // Obtém todos os times (equipes) aos quais o usuário pertence
@@ -34,30 +35,31 @@ class ProjectController extends Controller
     
         // Obtém todos os projetos associados às equipes do usuário
         $projects = Project::whereIn('team_id', $teamIds)->get();
-
-        $totalProjects = $projects->count();
     
-        $finishedProjects = $user->projects()->where('status', 1)->get();
-
-        $totalTasks = 0;
+        // Inicializa um array para armazenar os dados do projeto
+        $projectData = [];
     
         foreach ($projects as $project) {
-            $totalTasks += $project->tasks()->count();
+            $totalTasks = $project->tasks->count();
+            $completedTasks = $project->tasks->where('status', 1)->count(); 
+    
+            // Calcula o percentual de tarefas concluídas
+            if ($totalTasks == 0) {
+                $taskDonePercent = 0;
+            } else {
+                $taskDonePercent = ($completedTasks / $totalTasks) * 100;
+            }
+    
+            // Armazena os dados do projeto no array $projectData
+            $projectData[] = [
+                'project' => $project,
+                'totalTasks' => $totalTasks,
+                'completedTasks' => $completedTasks,
+                'taskDonePercent' => $taskDonePercent,
+            ];
         }
     
-        $totalTasksStatusOne = 0;
-    
-        foreach ($finishedProjects as $project) {
-            $totalTasksStatusOne += $project->tasks()->where('status', 1)->count();
-        }
-
-        if($totalTasks == 0){
-            $taskDonePercent = ($totalTasksStatusOne / 1) * 100;
-        } else{
-            $taskDonePercent = ($totalTasksStatusOne / $totalTasks) * 100;
-        }
-    
-        return view('projects.list', compact('projects', 'taskDonePercent'));
+        return view('projects.list', compact('projectData'));
     }
     
 
@@ -125,6 +127,14 @@ class ProjectController extends Controller
 
         $project = new Project;
 
+        $user = Auth::user();
+        
+        // Obter o time atual do usuário
+        $currentTeam = $user->currentTeam;
+
+        // Agora você pode acessar as informações do time atual, por exemplo, o nome:
+        $teamName = $currentTeam->name;
+
         $project->projectName = $request->projectName;
         $project->projectDescription = $request->projectDescription;
         $project->G = $request->g;
@@ -132,7 +142,8 @@ class ProjectController extends Controller
         $project->T = $request->t;
         $project->Total = $request->g + $request->u + $request->t;
         $project->status = 0;
-        $project->team_id = $request->teamId;
+        $project->team_id = $currentTeam->id;
+        $project->teamName = $teamName;
     
         $project->save();
     
@@ -214,6 +225,51 @@ class ProjectController extends Controller
         }
         
         return view('report.report', compact('totalProjects','finishedProjects', 'teams', 'totalTasksStatusOne', 'taskDonePercent', 'projectsByTeam', 'formattedData'));
+    }
+
+
+    public function swot()
+    {
+        // Verifique se o usuário está autenticado
+        if (Auth::check()) {
+            // Obtém o usuário autenticado
+            $user = Auth::user();
+
+            // Obtém o time associado ao usuário
+            $currentTeam = $user->currentTeam;
+
+            // Verifica se um time atual está definido para o usuário
+            if ($currentTeam) {
+                // Use o ID do time como parte da chave de cache
+                $cacheKey = 'swot_data_' . $currentTeam->id;
+
+                // Tente recuperar os dados da matriz SWOT do cache
+                $swotData = cache($cacheKey);
+
+                // Se os dados não estiverem no cache, inicialize-os como vazios
+                if (!$swotData) {
+                    $swotData = [
+                        'strengths' => '',
+                        'weaknesses' => '',
+                        'opportunities' => '',
+                        'threats' => '',
+                    ];
+                }
+
+                // Passe os dados da matriz SWOT para a view
+                // Passe os dados da matriz SWOT e o objeto currentTeam para a view
+                // Passe os dados da matriz SWOT e o objeto currentTeam para a view
+                return view('swot.swot', ['swotData' => $swotData, 'currentTeam' => $currentTeam]);
+
+
+            } else {
+                // O usuário não tem um time atual definido
+                // Trate esse caso de acordo com sua lógica de negócios
+            }
+        } else {
+            // O usuário não está autenticado
+            // Trate esse caso de acordo com sua lógica de autenticação
+        }
     }
 
 

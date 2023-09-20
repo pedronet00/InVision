@@ -12,15 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('projects', function (Blueprint $table) {
-            $table->unsignedBigInteger('team_id'); // Coluna para a chave estrangeira
-
-            // Define a chave estrangeira
-            $table->foreign('team_id')
-                  ->references('id')
-                  ->on('teams')
-                  ->onDelete('cascade');
-            
-           
+            $table->string('teamName');
         });
     }
 
@@ -30,8 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('projects', function (Blueprint $table) {
-            $table->dropForeign(['team_id']);
-            $table->dropColumn('team_id');
+            $table->dropColumn('teamName');
         });
     }
 };

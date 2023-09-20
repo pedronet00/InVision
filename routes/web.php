@@ -27,7 +27,7 @@ Route::post('/project', [ProjectController::class, 'store'])->middleware('auth')
 
 Route::post('/project/{id}/task', [TaskController::class, 'store'])->middleware('auth');
 
-Route::get('/swot', function(){ return view('swot.swot');})->middleware('auth');
+Route::get('/swot', [ProjectController::class, 'swot'])->middleware('auth');
 
 Route::get('/project/{id}/task/ended', [TaskController::class, 'taskEnded'])->middleware('auth');
 
@@ -36,7 +36,6 @@ Route::get('/project/{id}/task/deleted', [TaskController::class, 'taskDeleted'])
 Route::get('/project/{id}/deleted', [ProjectController::class, 'projectDeleted'])->middleware('auth');
 
 Route::get('/project/{id}/ended', [ProjectController::class, 'projectEnded'])->middleware('auth');
-
 
 Route::get('/report', [ProjectController::class, 'report'])->middleware('auth');
 

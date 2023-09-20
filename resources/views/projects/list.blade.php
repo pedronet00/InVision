@@ -6,7 +6,9 @@
 @php
   $pageTitle = 'Seus Projetos | InVision';
 @endphp
-
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <style>
   .card-subtitle, .card-title {
     font-weight: 400;
@@ -58,8 +60,11 @@
 </style>
 <x-app-layout>
 
+@php
+  $totalProjects = count($projectData);
+@endphp
 
-@if(count($projects) > 0)
+ @if($totalProjects > 0)
 {{-- <a href="/project/create" style="margin: 2%; width: 12rem; border-radius: 10px; padding: 0.5%; background-color: #6875f5; color: white; text-align: center; display: block; font-size: 20px;"><i class="fa-solid fa-plus" style="color: #ffffff;"></i>&nbsp;&nbsp;Novo Projeto</a> --}}
   <div class="container" style="width: 90%;">
     {{-- <div class="row"> --}}
@@ -69,46 +74,47 @@
       {{-- PROJETOS EM ANDAMENTO --}}
 
        <?php $totalProjetosAndamento = 0;?>
-        @foreach($projects as $project)
-          @if($project->status == 0)
+        @foreach($projectData as $data)
+          @if($data['project']->status == 0)
             <?php $totalProjetosAndamento = $totalProjetosAndamento + 1; ?>
           @endif
         @endforeach
 
 <div class="container p-0">
 
-    <a href="#" class="btn float-right mt-n1" style="background-color: #6875f5; color: white;"><i class="fas fa-plus"></i> Novo projeto</a>
+    <a href="/project/create" class="btn float-right mt-n1" style="background-color: #6875f5; color: white;"><i class="fas fa-plus"></i> Novo projeto</a>
 	<h1 class="h3 mb-3">Em andamento (<?php echo $totalProjetosAndamento; ?>)</h1>
 
 	<div class="row">
-  @foreach($projects as $project)
-    @if($project->status == 0)
+  @foreach($projectData as $data)
+    @if($data['project']->status == 0)
 		<div class="col-12 col-md-6 col-lg-3">
 			<div class="card">
       
 				<div class="card-header px-4 pt-4">
 					<div class="card-actions float-right">
-						<div class="dropdown show">
-    <a href="#" data-toggle="dropdown" data-display="static">
+						<div class="dropdown">
+    <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal align-middle">
             <circle cx="12" cy="12" r="1"></circle>
             <circle cx="19" cy="12" r="1"></circle>
             <circle cx="5" cy="12" r="1"></circle>
         </svg>
     </a>
-    <div class="dropdown-menu dropdown-menu-right">
-        <a class="dropdown-item" href="/project/{{$project->id}}">Editar</a>
-        <a class="dropdown-item" href="/project/{{$project->id}}/deleted">Deletar</a>
-        <a class="dropdown-item" href="/project/{{$project->id}}/ended">Finalizar</a>
-    </div>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
+        <li><a class="dropdown-item" href="/project/{{$data['project']->id}}">Editar</a></li>
+        <li><a class="dropdown-item" href="/project/{{$data['project']->id}}/deleted">Deletar</a></li>
+        <li><a class="dropdown-item" href="/project/{{$data['project']->id}}/ended">Finalizar</a></li>
+    </ul>
 </div>
 
+
 					</div>
-					<h5 class="card-title mb-0"><a href="/project/{{$project->id}}">{{$project->projectName}}</a></h5>
+					<h5 class="card-title mb-0"><a href="/project/{{$data['project']->id}}">{{$data['project']->projectName}}</a></h5> 
 					<div class="badge bg-warning my-2">Em andamento</div>
 				</div>
 				<div class="card-body px-4 pt-2">
-					<p>{{$project->projectDescription}}</p>
+					<p>{{$data['project']->projectDescription}}</p>
           <div class="icones" style="display: flex; margin-top: 5%;">
             <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Avatar" width="28" height="28">
             <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="rounded-circle mr-1" alt="Avatar" width="28" height="28">
@@ -117,9 +123,9 @@
 				</div>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item px-4 pb-4">
-						<p class="mb-2 font-weight-bold">Progresso <span class="float-right">{{$taskDonePercent}} %</span></p>
+						<p class="mb-2 font-weight-bold">Progresso <span class="float-right">{{$data['taskDonePercent']}} %</span></p>
 						<div class="progress progress-sm">
-							<div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: {{$taskDonePercent}}%;">
+							<div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: {{$data['taskDonePercent']}}%;">
 							</div>
 						</div>
 					</li>
@@ -143,8 +149,8 @@
     {{-- PROJETOS FINALIZADOS --}}
 
     <?php $totalProjetosFinalizados = 0;?>
-    @foreach($projects as $project)
-      @if($project->status == 1)
+    @foreach($projectData as $data)
+    @if($data['project']->status == 1)
         <?php $totalProjetosFinalizados = $totalProjetosFinalizados + 1; ?>
       @endif
     @endforeach
@@ -154,8 +160,8 @@
 	<h1 class="h3 mb-3">Finalizados (<?php echo $totalProjetosFinalizados; ?>)</h1>
 
 	<div class="row">
-  @foreach($projects as $project)
-    @if($project->status == 1)
+  @foreach($projectData as $data)
+    @if($data['project']->status == 1)
 		<div class="col-12 col-md-6 col-lg-3">
 			<div class="card">
       
@@ -165,19 +171,13 @@
 							<a href="#" data-toggle="dropdown" data-display="static">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal align-middle"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
 							</a>
-
-							<div class="dropdown-menu dropdown-menu-right">
-								<a class="dropdown-item" href="/project/{{$project->id}}">Editar</a>
-								<a class="dropdown-item" href="/project/{{$project->id}}/deleted">Deletar</a>
-								<a class="dropdown-item" href="/project/{{$project->id}}/ended">Finalizar</a>
-							</div>
 						</div>
 					</div>
-					<h5 class="card-title mb-0"><a href="/project/{{$project->id}}">{{$project->projectName}}</a></h5> 
+					<h5 class="card-title mb-0"><a href="/project/{{$data['project']->id}}">{{$data['project']->projectName}}</a></h5>  
 					<div class="badge bg-success my-2">Finalizado</div>
 				</div>
 				<div class="card-body px-4 pt-2">
-          <p>{{$project->projectDescription}}</p>
+          <p>{{$data['project']->projectDescription}}</p>
           <div class="icones" style="display: flex; margin-top: 5%;">
             <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Avatar" width="28" height="28">
             <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="rounded-circle mr-1" alt="Avatar" width="28" height="28">
@@ -192,17 +192,17 @@
 	</div>
 </div>
       @if($totalProjetosFinalizados == 0)
-          <p style="text-align: center; width: 100%; margin-top: 10%; color: grey;">Não há projetos finalizados.</p>
+          <p style="text-align: center; width: 100%; margin-top: 5%; margin-bottom: 5%; color: grey;">Não há projetos finalizados.</p>
         @endif
     </div>
     </div>
   </div> 
     
-@endif
+ @endif
 
 
 
-@if(count($projects) == 0)
+ @if($totalProjects == 0)
     <div class="msg-sem-projetos" style="margin: auto; text-align: center; margin-top: 15%;">
         <h3 style="font-size: 32px;">Você ainda não cadastrou um projeto :(</h3>
         <br/>
@@ -210,6 +210,8 @@
         <br/><br/>
         <a href="/project/create" class="cadastrar-agora" style="background-color: darkgrey; color: white; padding: 1%;  border-radius: 10px; font-size: 22px;">Cadastrar agora</a>
     </div>
-@endif
+@endif 
+
+
 </x-app-layout>
 @endsection
