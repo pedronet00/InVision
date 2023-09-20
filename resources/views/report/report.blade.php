@@ -256,6 +256,62 @@
             </div>
         </div>
 
-
+        <div style="width: 80%;">
+            <canvas id="projectChart"></canvas>
+        </div>
+        <script>
+            var data = {!! json_encode($formattedData) !!};
+            var ctx = document.getElementById('projectChart').getContext('2d');
+        
+            var dates = data.map(function(item) {
+                return item.year + '-' + (item.month < 10 ? '0' : '') + item.month;
+            });
+        
+            var counts = data.map(function(item) {
+                return item.count;
+            });
+        
+            var chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Projetos Finalizados',
+                        data: counts,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1,
+                        fill: false,
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: {
+                                unit: 'month',
+                                displayFormats: {
+                                    month: 'MMM YYYY'
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Período'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Quantidade de Projetos'
+                            }
+                        }
+                    }
+                }
+            });
+        </script>
+        
+        
+        
+        
     </x-app-layout>
 @endsection

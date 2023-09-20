@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Task;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
@@ -33,8 +34,30 @@ class ProjectController extends Controller
     
         // Obtém todos os projetos associados às equipes do usuário
         $projects = Project::whereIn('team_id', $teamIds)->get();
+
+        $totalProjects = $projects->count();
     
-        return view('projects.list', compact('projects'));
+        $finishedProjects = $user->projects()->where('status', 1)->get();
+
+        $totalTasks = 0;
+    
+        foreach ($projects as $project) {
+            $totalTasks += $project->tasks()->count();
+        }
+    
+        $totalTasksStatusOne = 0;
+    
+        foreach ($finishedProjects as $project) {
+            $totalTasksStatusOne += $project->tasks()->where('status', 1)->count();
+        }
+
+        if($totalTasks == 0){
+            $taskDonePercent = ($totalTasksStatusOne / 1) * 100;
+        } else{
+            $taskDonePercent = ($totalTasksStatusOne / $totalTasks) * 100;
+        }
+    
+        return view('projects.list', compact('projects', 'taskDonePercent'));
     }
     
 
@@ -171,9 +194,27 @@ class ProjectController extends Controller
                 'raw_count' => $projectCount,
                 'percentage' => $percentage,
             ];
+
+            $data = DB::table('projects')
+            ->select(DB::raw('YEAR(updated_at) as year, MONTH(updated_at) as month, COUNT(*) as count'))
+            ->where('status', 1)
+            ->groupBy('year', 'month')
+            ->orderBy('year', 'asc')
+            ->orderBy('month', 'asc')
+            ->get();
+
+        $formattedData = [];
+        foreach ($data as $item) {
+            $formattedData[] = [
+                'year' => $item->year,
+                'month' => $item->month,
+                'count' => $item->count,
+            ];
+        }
         }
         
-        return view('report.report', compact('totalProjects','finishedProjects', 'teams', 'totalTasksStatusOne', 'taskDonePercent', 'projectsByTeam'));
+        return view('report.report', compact('totalProjects','finishedProjects', 'teams', 'totalTasksStatusOne', 'taskDonePercent', 'projectsByTeam', 'formattedData'));
     }
-    
+
+
 }

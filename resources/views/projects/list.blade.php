@@ -61,7 +61,7 @@
 
 @if(count($projects) > 0)
 {{-- <a href="/project/create" style="margin: 2%; width: 12rem; border-radius: 10px; padding: 0.5%; background-color: #6875f5; color: white; text-align: center; display: block; font-size: 20px;"><i class="fa-solid fa-plus" style="color: #ffffff;"></i>&nbsp;&nbsp;Novo Projeto</a> --}}
-  <div class="container">
+  <div class="container" style="width: 90%;">
     {{-- <div class="row"> --}}
         
     
@@ -104,13 +104,12 @@
 </div>
 
 					</div>
-					<h5 class="card-title mb-0">{{$project->projectName}}</h5>
+					<h5 class="card-title mb-0"><a href="/project/{{$project->id}}">{{$project->projectName}}</a></h5>
 					<div class="badge bg-warning my-2">Em andamento</div>
 				</div>
 				<div class="card-body px-4 pt-2">
-					<p>Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque
-						sed ipsum.</p>
-          <div class="icones" style="display: flex;">
+					<p>{{$project->projectDescription}}</p>
+          <div class="icones" style="display: flex; margin-top: 5%;">
             <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Avatar" width="28" height="28">
             <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="rounded-circle mr-1" alt="Avatar" width="28" height="28">
             <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Avatar" width="28" height="28">
@@ -118,9 +117,9 @@
 				</div>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item px-4 pb-4">
-						<p class="mb-2 font-weight-bold">Progress <span class="float-right">100%</span></p>
+						<p class="mb-2 font-weight-bold">Progresso <span class="float-right">{{$taskDonePercent}} %</span></p>
 						<div class="progress progress-sm">
-							<div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+							<div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: {{$taskDonePercent}}%;">
 							</div>
 						</div>
 					</li>
@@ -174,27 +173,17 @@
 							</div>
 						</div>
 					</div>
-					<h5 class="card-title mb-0">{{$project->projectName}}</h5> 
+					<h5 class="card-title mb-0"><a href="/project/{{$project->id}}">{{$project->projectName}}</a></h5> 
 					<div class="badge bg-success my-2">Finalizado</div>
 				</div>
 				<div class="card-body px-4 pt-2">
-					<p>Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque
-						sed ipsum.</p>
-          <div class="icones" style="display: flex;">
+          <p>{{$project->projectDescription}}</p>
+          <div class="icones" style="display: flex; margin-top: 5%;">
             <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Avatar" width="28" height="28">
             <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="rounded-circle mr-1" alt="Avatar" width="28" height="28">
             <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Avatar" width="28" height="28">
           </div>
 				</div>
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item px-4 pb-4">
-						<p class="mb-2 font-weight-bold">Progress <span class="float-right">100%</span></p>
-						<div class="progress progress-sm">
-							<div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-							</div>
-						</div>
-					</li>
-				</ul>
 			</div>
       
 		</div>
