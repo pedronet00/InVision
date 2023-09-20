@@ -11,6 +11,26 @@
     .cadastrar-agora:hover{
         transform: scale(1.2);
     }
+
+    
+
+
+.l-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 30px;
+  width: 100%;
+  max-width: 1200px;
+  padding: 30px;
+  
+  @media screen and (max-width: 760px) {
+    display: block;
+  }
+  
+}
+
+  
+
 </style>
 
 <x-app-layout>
@@ -22,13 +42,13 @@
 
 
       @foreach($projects as $project)
-          @if($project->status != 1)
+          @if($project->status == 0)
 
               <div class="col">
-                <div class="card" style="background-color: #6875f5; color: white;">
+                <div class="card" style="background-color: #6875f5; color: white; text-align: center;">
                   <div class="card-body">
-                    <a href="/project/{{$project->id}}" style="text-decoration: none; color: white; font-size: 25px;" class="card-title">{{$project->projectName}}</a>
-                    <p class="card-text" style="color: lightgrey;">{{$project->projectDescription}}</p>
+                    <a href="/project/{{$project->id}}" style="text-decoration: none; color: white; font-size: 25px; " class="card-title">{{$project->projectName}}</a>
+                    <p class="card-text" style="color: lightgrey; text-align: center;">{{$project->projectDescription}}</p>
                     <div class="gut" style="display: flex; justify-content: space-evenly; margin-top: 5%;">
                         <p><span style="color: white;">G:</span> <span style="font-size: 25px; font-weight: bold;">{{$project->G}}</span></p>
                         <p><span style="color: white;">U:</span> <span style="font-size: 25px; font-weight: bold;">{{$project->U}}</span></p>
@@ -189,6 +209,38 @@
         </div>
     </section>             
 </div> 
+
+<div class="l-container" style="width: 90%; margin: auto;">
+  <div class="b-game-card" style="background-color: #f3f4f6;">
+    <div class="b-game-card__cover" style="text-align: center;">
+      <h2 style="font-size: 32px; color: #6875f5;"><span style="font-size: 70px;">S</span>trength</h2>
+      <small style="color: grey;">Forças</small>
+      <p style="margin-top: 10%;"> São as características internas positivas da empresa, como recursos, habilidades, vantagens competitivas e ativos que a organização possui. As forças destacam, basicamente, o que a empresa faz bem - seus pontos fortes.</p>
+    </div>
+  </div>
+  <div class="b-game-card" style="background-color: #f3f4f6;">
+    <div class="b-game-card__cover" style="text-align: center;">
+      <h2 style="font-size: 32px; color: #6875f5;"><span style="font-size: 70px;">W</span>eakness</h2>
+      <small style="color: grey;">Fraquezas</small>
+      <p style="margin-top: 10%;">São as características internas negativas da empresa, como deficiências, limitações e áreas em que a organização está em desvantagem em relação à concorrência. As fraquezas apontam aspectos onde a empresa precisa melhorar.</p>
+    </div>
+  </div>
+  <div class="b-game-card" style="background-color: #f3f4f6;">
+    <div class="b-game-card__cover" style="text-align: center;">
+      <h2 style="font-size: 32px; color: #6875f5;"><span style="font-size: 70px;">O</span>pportunities</h2>
+      <small style="color: grey;">Oportunidades</small>
+      <p style="margin-top: 10%;">São fatores externos positivos que podem beneficiar a organização, como tendências de mercado, demanda crescente, mudanças regulatórias favoráveis ou novas oportunidades de negócios. Identificar oportunidades ajuda a empresa a explorar novas áreas de crescimento.</p>
+    </div>
+  </div>
+  <div class="b-game-card" style="background-color: #f3f4f6;">
+    <div class="b-game-card__cover" style="text-align: center;">
+      <h2 style="font-size: 32px; color: #6875f5;"><span style="font-size: 70px;">T</span>hreats</h2>
+      <small style="color: grey;">Ameaças</small>
+      <p style="margin-top: 10%;">São fatores externos negativos que podem representar desafios para a organização, como concorrência intensa, mudanças no mercado, crises econômicas ou regulamentações desfavoráveis. Reconhecer ameaças ajuda a empresa a se preparar e a se defender contra possíveis problemas.</p>
+    </div>
+  </div>
+  
+</div>
 
 
 </x-app-layout>

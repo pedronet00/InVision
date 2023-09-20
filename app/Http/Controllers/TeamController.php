@@ -275,4 +275,6 @@ class TeamController extends Controller
 
         return $this->teams->getAllTeamsForUser($user);
     }
+
+
 }

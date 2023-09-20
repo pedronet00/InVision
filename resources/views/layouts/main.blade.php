@@ -14,10 +14,11 @@
 
         {{-- FontAwesome --}}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+        
         <!-- Bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         
+    
         
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         <!-- Styles -->
@@ -434,11 +435,67 @@
                     }        
         </style>
     </head>
-<body class="antialiased">
+<body class="antialiased" style="background-color: #f3f4f6;">
 
 
 
 @yield('content')
+
+<section class="">
+  <!-- Footer -->
+  <footer class="text-white text-center text-md-start" style="background-color: #6875f5;">
+    <!-- Grid container -->
+    <div class="container p-4" style="background-color: #6875f5;">
+      <!--Grid row-->
+      <div class="row">
+        <!--Grid column-->
+        <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+          <h5 class="text-uppercase">In<span style="font-weight: 500;">Vision</span></h5>
+
+          <p>
+            Construído com o objetivo de facilitar o gerenciamento de seus projetos, este software te dá a possibilidade de organizar projetos por ordem de prioridade, cadastrar <i>tasks</i> dentro de cada projeto e definir a prioridade dessas tarefas também. Além disso, você também pode usar a matriz SWOT para estruturar os pilares da sua empresa. Aproveite!
+          </p>
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase mb-0">Links</h5>
+
+          <ul class="list-unstyled">
+            <li>
+              <a href="#!" class="text-white">Home</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">Projetos</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">SWOT</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">Relatórios</a>
+            </li>
+          </ul>
+        </div>
+        <!--Grid column-->
+      </div>
+      <!--Grid row-->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: #6875f5;">
+      © 2023 Copyright:
+      <a class="text-white" href="https://mdbootstrap.com/">InVision</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+</section>
+
 
 </body>
 </html>
