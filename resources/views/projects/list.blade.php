@@ -94,21 +94,19 @@
 				<div class="card-header px-4 pt-4">
 					<div class="card-actions float-right">
 						<div class="dropdown">
-    <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal align-middle">
-            <circle cx="12" cy="12" r="1"></circle>
-            <circle cx="19" cy="12" r="1"></circle>
-            <circle cx="5" cy="12" r="1"></circle>
-        </svg>
-    </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-        <li><a class="dropdown-item" href="/project/{{$data['project']->id}}">Editar</a></li>
-        <li><a class="dropdown-item" href="/project/{{$data['project']->id}}/deleted">Deletar</a></li>
-        <li><a class="dropdown-item" href="/project/{{$data['project']->id}}/ended">Finalizar</a></li>
-    </ul>
-</div>
-
-
+                <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal align-middle">
+                        <circle cx="12" cy="12" r="1"></circle>
+                        <circle cx="19" cy="12" r="1"></circle>
+                        <circle cx="5" cy="12" r="1"></circle>
+                    </svg>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item" href="/project/{{$data['project']->id}}">Editar</a></li>
+                    <li><a class="dropdown-item" href="/project/{{$data['project']->id}}/deleted">Deletar</a></li>
+                    <li><a class="dropdown-item" href="/project/{{$data['project']->id}}/ended">Finalizar</a></li>
+                </ul>
+            </div>
 					</div>
 					<h5 class="card-title mb-0"><a href="/project/{{$data['project']->id}}">{{$data['project']->projectName}}</a></h5> 
 					<div class="badge bg-warning my-2">Em andamento</div>

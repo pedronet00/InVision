@@ -22,7 +22,7 @@
     @endif
   </div>
 
-
+@if($project->status == 0)
   <div class="table-responsive">
     <table class="table" style="width: 50%; margin: 2% auto; 5% auto">
       <tr>
@@ -39,6 +39,7 @@
       </tr>
     </table>
   </div>
+@endif
 
   <div class="table-responsive">
     <table class="table" style="width: 70%; margin: 5% auto; text-align:center;">

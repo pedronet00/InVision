@@ -450,35 +450,15 @@
       <div class="row">
         <!--Grid column-->
         <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-          <h5 class="text-uppercase">Footer Content</h5>
+          <h5 class="text-uppercase">In<span style="font-weight: 500;">Vision</span></h5>
 
           <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
-            molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae
-            aliquam voluptatem veniam, est atque cumque eum delectus sint!
+            Construído com o objetivo de facilitar o gerenciamento de seus projetos, este software te dá a possibilidade de organizar projetos por ordem de prioridade, cadastrar <i>tasks</i> dentro de cada projeto e definir a prioridade dessas tarefas também. Além disso, você também pode usar a matriz SWOT para estruturar os pilares da sua empresa. Aproveite!
           </p>
         </div>
         <!--Grid column-->
 
         <!--Grid column-->
-        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-          <h5 class="text-uppercase">Links</h5>
-
-          <ul class="list-unstyled mb-0">
-            <li>
-              <a href="#!" class="text-white">Link 1</a>
-            </li>
-            <li>
-              <a href="#!" class="text-white">Link 2</a>
-            </li>
-            <li>
-              <a href="#!" class="text-white">Link 3</a>
-            </li>
-            <li>
-              <a href="#!" class="text-white">Link 4</a>
-            </li>
-          </ul>
-        </div>
         <!--Grid column-->
 
         <!--Grid column-->
@@ -487,16 +467,16 @@
 
           <ul class="list-unstyled">
             <li>
-              <a href="#!" class="text-white">Link 1</a>
+              <a href="#!" class="text-white">Home</a>
             </li>
             <li>
-              <a href="#!" class="text-white">Link 2</a>
+              <a href="#!" class="text-white">Projetos</a>
             </li>
             <li>
-              <a href="#!" class="text-white">Link 3</a>
+              <a href="#!" class="text-white">SWOT</a>
             </li>
             <li>
-              <a href="#!" class="text-white">Link 4</a>
+              <a href="#!" class="text-white">Relatórios</a>
             </li>
           </ul>
         </div>
