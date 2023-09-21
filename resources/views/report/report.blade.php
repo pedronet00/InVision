@@ -36,8 +36,9 @@
 
 
         
+        @if($totalProjects > 0)
 
-        <!-- Page Wrapper -->
+            <!-- Page Wrapper -->
         <div id="wrapper" style="width: 90%; margin: 2% auto;">
 
             
@@ -259,6 +260,15 @@
         <div style="width: 80%;">
             <canvas id="projectChart"></canvas>
         </div>
+
+        @else
+            <p>teste</p>
+
+        @endif
+        
+
+
+
         <script>
             var data = {!! json_encode($formattedData) !!};
             var ctx = document.getElementById('projectChart').getContext('2d');
