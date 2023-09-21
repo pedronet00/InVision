@@ -202,7 +202,7 @@
 
  @if($totalProjects == 0)
     <div class="msg-sem-projetos" style="margin: auto; text-align: center; margin-top: 15%;">
-        <h3 style="font-size: 32px;">Você ainda não cadastrou um projeto :(</h3>
+        <h3 style="font-size: 32px;">Você ainda não faz parte de um projeto :(</h3>
         <br/>
         <p style="color: grey;">Não perca mais tempo e desfrute da agilidade de gerenciamento de seus projetos.</p>
         <br/><br/>
