@@ -75,7 +75,7 @@
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $totalProjects; ?></div>
                                             </div>
                                             <div class="col-auto">
-                                                <i class="fas fa-comments fa-2x" style="color: #ffc187;"></i>
+                                                <i class="fa-solid fa-folder-open fa-2x" style="color: #ffc187;"></i>
                                             </div>
                                         </div>
                                     </div>

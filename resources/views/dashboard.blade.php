@@ -8,26 +8,45 @@
 
 <style>
 
-    .cadastrar-agora:hover{
-        transform: scale(1.2);
-    }
-
-    
-
-
-.l-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 30px;
-  width: 100%;
-  max-width: 1200px;
-  padding: 30px;
-  
-  @media screen and (max-width: 760px) {
-    display: block;
+  .principal{
+    width: 90%; 
+    margin: 5% auto;
   }
-  
-}
+
+  .cadastrar-agora:hover{
+    transform: scale(1.2);
+  }
+
+  .nome-projeto{
+    text-decoration: none; 
+    color: white; 
+    font-size: 25px;
+  }
+
+  .nome-projeto:hover{
+    color: #8fa3f7;
+  }
+
+  .card-projetos-inicial{
+    background-color: #6875f5; 
+    color: white; 
+    text-align: center;
+  }
+
+
+  .l-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
+    width: 100%;
+    max-width: 1200px;
+    padding: 30px;
+    
+    @media screen and (max-width: 760px) {
+      display: block;
+    }
+    
+  }
 
   
 
@@ -36,7 +55,14 @@
 <x-app-layout>
 
 
-<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3" style="width: 90%; margin: 5% auto;">
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 principal">
+
+@php
+
+  $projetosAndamento = 0;
+
+@endphp
 
   @if(count($projects) > 0)
 
@@ -44,10 +70,14 @@
       @foreach($projects as $project)
           @if($project->status == 0)
 
+          @php
+            $projetosAndamento = $projetosAndamento + 1;
+          @endphp
+
               <div class="col">
-                <div class="card" style="background-color: #6875f5; color: white; text-align: center;">
+                <div class="card card-projetos-inicial">
                   <div class="card-body">
-                    <a href="/project/{{$project->id}}" style="text-decoration: none; color: white; font-size: 25px; " class="card-title">{{$project->projectName}}</a>
+                    <a href="/project/{{$project->id}}" class="card-title nome-projeto">{{$project->projectName}}</a>
                     <p class="card-text" style="color: lightgrey; text-align: center;">{{$project->projectDescription}}</p>
                     <div class="gut" style="display: flex; justify-content: space-evenly; margin-top: 5%;">
                         <p><span style="color: white;">G:</span> <span style="font-size: 25px; font-weight: bold;">{{$project->G}}</span></p>
@@ -59,6 +89,15 @@
               </div>
           @endif
       @endforeach
+      @if($projetosAndamento == 0)
+        <div class="msg-sem-projetos" style="margin: auto; text-align: center;">
+          <h3 style="font-size: 32px;">Todos os seus projetos estão finalizados!</h3>
+          <br/>
+          <p style="color: grey;">Continue criando mais tarefas e gerencie melhor seu negócio!</p>
+          <br/>
+          <a href="/project/create" class="cadastrar-agora" style="background-color: #6875f5; color: white; padding: 2%;  border-radius: 10px; font-size: 22px;">Novo projeto</a>
+      </div>
+      @endif
   @else
       <div class="msg-sem-projetos" style="margin: auto; text-align: center;">
           <h3 style="font-size: 32px;">Você não tem nenhum projeto em andamento :(</h3>

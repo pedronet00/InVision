@@ -11,8 +11,9 @@ class Project extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'project_user'); // Substitua 'project_user' pelo nome correto da tabela pivot
     }
+
 
     public function team()
     {

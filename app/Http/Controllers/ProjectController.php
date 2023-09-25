@@ -38,6 +38,8 @@ class ProjectController extends Controller
     
         // Inicializa um array para armazenar os dados do projeto
         $projectData = [];
+
+        
     
         foreach ($projects as $project) {
             $totalTasks = $project->tasks->count();
@@ -49,6 +51,8 @@ class ProjectController extends Controller
             } else {
                 $taskDonePercent = ($completedTasks / $totalTasks) * 100;
             }
+
+            // $projectUsers = $projects->users;
     
             // Armazena os dados do projeto no array $projectData
             $projectData[] = [
@@ -56,6 +60,7 @@ class ProjectController extends Controller
                 'totalTasks' => $totalTasks,
                 'completedTasks' => $completedTasks,
                 'taskDonePercent' => $taskDonePercent,
+                // 'projectUsers' => $projectUsers,
             ];
         }
     
@@ -124,6 +129,14 @@ class ProjectController extends Controller
  }
 
     public function store(Request $request){
+
+        $validatedData = $request->validate([
+            'projectName' => 'required|string|max:255',
+            'projectDescription' => 'required|string',
+            'g' => 'required|numeric',
+            'u' => 'required|numeric',
+            't' => 'required|numeric',
+        ]);
 
         $project = new Project;
 
