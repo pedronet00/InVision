@@ -30,7 +30,7 @@
                     <!-- Role -->
                     @if (count($this->roles) > 0)
                         <div class="col-span-6 lg:col-span-4">
-                            <x-label for="role" value="{{ __('Role') }}" />
+                            <x-label for="role" value="{{ __('Função') }}" />
                             <x-input-error for="role" class="mt-2" />
 
                             <div class="relative z-0 mt-1 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer">
