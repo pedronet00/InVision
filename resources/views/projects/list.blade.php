@@ -57,6 +57,16 @@
     margin-top: 5%;
   }
 
+  .novo-projeto{
+    background-color: #6875f5; 
+    color: white;
+  }
+
+  .novo-projeto:hover{
+    background-color: #8fa3f7;
+    color: white;
+  }
+
 </style>
 <x-app-layout>
 
@@ -82,7 +92,7 @@
 
 <div class="container p-0">
 
-    <a href="/project/create" class="btn float-right mt-n1" style="background-color: #6875f5; color: white;"><i class="fas fa-plus"></i> Novo projeto</a>
+    <a href="/project/create" class="btn float-right mt-n1 novo-projeto"><i class="fas fa-plus"></i> Novo projeto</a>
 	<h1 class="h3 mb-3">Em andamento (<?php echo $totalProjetosAndamento; ?>)</h1>
 
 	<div class="row">
@@ -114,9 +124,9 @@
 				<div class="card-body px-4 pt-2">
 					<p>{{$data['project']->projectDescription}}</p>
           <div class="icones" style="display: flex; margin-top: 5%;">
-            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Avatar" width="28" height="28">
-            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="rounded-circle mr-1" alt="Avatar" width="28" height="28">
-            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Avatar" width="28" height="28">
+            @foreach($data['project']->users as $user)
+              <img src="/storage/{{ $user->profile_photo_path }}" style="width: 50px;height: 50px; object-fit: cover;border-radius: 50%;" alt="Avatar">
+            @endforeach
           </div>
 				</div>
 				<ul class="list-group list-group-flush">
@@ -165,11 +175,18 @@
       
 				<div class="card-header px-4 pt-4">
 					<div class="card-actions float-right">
-						<div class="dropdown show">
-							<a href="#" data-toggle="dropdown" data-display="static">
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal align-middle"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
-							</a>
-						</div>
+						<div class="dropdown">
+                <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal align-middle">
+                        <circle cx="12" cy="12" r="1"></circle>
+                        <circle cx="19" cy="12" r="1"></circle>
+                        <circle cx="5" cy="12" r="1"></circle>
+                    </svg>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item" href="/project/{{$data['project']->id}}/deleted">Deletar</a></li>
+                </ul>
+            </div>
 					</div>
 					<h5 class="card-title mb-0"><a href="/project/{{$data['project']->id}}">{{$data['project']->projectName}}</a></h5>  
 					<div class="badge bg-success my-2">Finalizado</div>
@@ -177,9 +194,9 @@
 				<div class="card-body px-4 pt-2">
           <p>{{$data['project']->projectDescription}}</p>
           <div class="icones" style="display: flex; margin-top: 5%;">
-            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Avatar" width="28" height="28">
-            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="rounded-circle mr-1" alt="Avatar" width="28" height="28">
-            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Avatar" width="28" height="28">
+            @foreach($data['project']->users as $user)
+              <img src="/storage/{{ $user->profile_photo_path }}" style="width: 50px;height: 50px; object-fit: cover;border-radius: 50%;" alt="Avatar">
+            @endforeach
           </div>
 				</div>
 			</div>

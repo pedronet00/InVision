@@ -10,6 +10,19 @@
 
 <x-app-layout>
 
+<style>
+
+  .cadastrar_task{
+    background-color: #8fa3f7; 
+    border: none;
+  }
+
+  .cadastrar_task:hover{
+    background-color: #6a84f4;
+  }
+</style>
+
+
   <h1 style="text-align: center; font-size: 50px; margin-top: 5%;">{{$project->projectName}}</h1>
 
   <div style="text-align: center; margin-top: 0.8%;">
@@ -34,7 +47,7 @@
           <td scope="col"><input type="number" class="form-control" id="inputEmail4" value="0" max="5" min="0" name="u" style="background-color: #f3f4f6; border-radius: 5px;"></td>
           <td scope="col"><input type="number" class="form-control" id="inputEmail4" value="0" max="5" min="0" name="t" style="background-color: #f3f4f6; border-radius: 5px;"></td>
           <td scope="col"></td>
-          <td scope="col" colspan="2"><button type="submit" class="btn btn-primary" style="background-color: #8fa3f7; border: none;">Cadastrar</button></td>
+          <td scope="col" colspan="2"><button type="submit" class="btn btn-primary cadastrar_task">Cadastrar</button></td>
         </form>
       </tr>
     </table>

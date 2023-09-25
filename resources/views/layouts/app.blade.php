@@ -16,6 +16,12 @@
 
         <!-- Styles -->
         @livewireStyles
+
+        <style>
+            .cadastrar_task:hover{
+    background-color: red;
+  }
+        </style>
     </head>
     <body class="font-sans antialiased">
         <x-banner />

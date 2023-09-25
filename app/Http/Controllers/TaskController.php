@@ -12,6 +12,15 @@ class TaskController extends Controller
 
     public function store(Request $request, $projectId)
     {
+
+        $validatedData = $request->validate([
+            'taskName' => 'required|string|max:255',
+            'g' => 'required|integer|max:1',
+            'u' => 'required|integer|max:1',
+            't' => 'required|integer|max:1',
+            
+        ]);
+
         $task = new Task;
 
         $task->taskName = $request->taskName;

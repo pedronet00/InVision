@@ -433,6 +433,10 @@
                     color: #FFF;
                     text-decoration:none;
                     }        
+
+                    .cadastrar_task:hover{
+                        background-color: red;
+                    }
         </style>
     </head>
 <body class="antialiased" style="background-color: #f3f4f6;">

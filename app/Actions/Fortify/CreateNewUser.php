@@ -24,24 +24,33 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input): User
     {
         // Validação dos dados de entrada
-        Validator::make($input, [
+        $validator = Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
+            'profile_photo' => ['image', 'max:2048'], // Max size in KB (2MB)
         ])->validate();
 
+        // Upload da foto de perfil
+        if (isset($input['profile_photo'])) {
+            $path = $input['profile_photo']->store('profile-photos', 'public');
+        } else {
+            $path = 'default-profile-photo.jpg'; // Defina uma imagem padrão se nenhuma for enviada
+        }
 
-        return DB::transaction(function () use ($input, $profilePhotoPath) {
+        return DB::transaction(function () use ($input, $path) {
             return tap(User::create([
                 'name' => $input['name'],
                 'email' => $input['email'],
                 'password' => Hash::make($input['password']),
+                'profile_photo_path' => $path, // Salve o caminho da foto de perfil no banco de dados
             ]), function (User $user) {
                 $this->createTeam($user);
             });
         });
     }
+
 
 
     /**
